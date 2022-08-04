@@ -8,7 +8,8 @@ const makemap = () => {
     container: "map",
     style: "mapbox://styles/dvrpcomad/cks6eiqga0tmc17p3ecw7ij53",
     center: [-122.68507221321813, 45.512064200516335],
-    zoom: 9.5,
+    zoom: 12,
+    pitch: 60,
   });
 };
 
