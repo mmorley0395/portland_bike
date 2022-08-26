@@ -5,8 +5,7 @@ map.on("load", () => {
   // LOAD DATA: add vector tileset from DVRPC's server
 });
 map.on("style.load", () => {
-  // https://en.wikipedia.org/wiki/Transpeninsular_Line
-  const transpeninsularLine = {
+  const day_zero_line = {
     type: "Feature",
     properties: {
       stroke: "#555555",
@@ -50,17 +49,17 @@ map.on("style.load", () => {
     },
   };
 
-  map.addSource("tp-line", {
+  map.addSource("day-zero", {
     type: "geojson",
-    data: transpeninsularLine,
+    data: day_zero_line,
     // Line metrics is required to use the 'line-progress' property
     lineMetrics: true,
   });
 
   map.addLayer({
-    id: "tp-line-line",
+    id: "day-zero-line",
     type: "line",
-    source: "tp-line",
+    source: "day-zero",
     paint: {
       "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
@@ -69,7 +68,7 @@ map.on("style.load", () => {
   });
 
   let startTime;
-  const duration = 20000;
+  const duration = 40000;
   const frame = (time) => {
     if (!startTime) startTime = time;
     const animationPhase = (time - startTime) / duration;
@@ -77,10 +76,10 @@ map.on("style.load", () => {
 
     // Reduce the visible length of the line by using a line-gradient to cutoff the line
     // animationPhase is a value between 0 and 1 that reprents the progress of the animation
-    map.setPaintProperty("tp-line-line", "line-gradient", [
+    map.setPaintProperty("day-zero-line", "line-gradient", [
       "step",
       ["line-progress"],
-      "green",
+      "#77dcb7",
       animationPhase,
       "rgba(0, 0, 0, 0)",
     ]);
