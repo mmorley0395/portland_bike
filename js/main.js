@@ -69,8 +69,7 @@ map.on("style.load", () => {
   });
 
   let startTime;
-  const duration = 5000;
-
+  const duration = 20000;
   const frame = (time) => {
     if (!startTime) startTime = time;
     const animationPhase = (time - startTime) / duration;
