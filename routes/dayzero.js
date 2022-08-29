@@ -1,17 +1,17 @@
-{
-  "type": "FeatureCollection",
-  "name": "tracks",
-  "crs": {
-    "type": "name",
-    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+var dayzero = {
+  type: "FeatureCollection",
+  name: "tracks",
+  crs: {
+    type: "name",
+    properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" },
   },
-  "features": [
+  features: [
     {
-      "type": "Feature",
-      "properties": { "name": "Day zero ", "type": "1" },
-      "geometry": {
-        "type": "MultiLineString",
-        "coordinates": [
+      type: "Feature",
+      properties: { name: "Day zero ", type: "1" },
+      geometry: {
+        type: "MultiLineString",
+        coordinates: [
           [
             [-122.671221, 45.525078],
             [-122.670898, 45.525076],
@@ -3230,10 +3230,12 @@
             [-122.680865, 45.506894],
             [-122.680864, 45.506889],
             [-122.680859, 45.506879],
-            [-122.680847, 45.506885]
-          ]
-        ]
-      }
-    }
-  ]
-}
+            [-122.680847, 45.506885],
+          ],
+        ],
+      },
+    },
+  ],
+};
+
+export { dayzero };
