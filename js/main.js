@@ -7,30 +7,22 @@ class RouteLine {
     stroke: "#555555",
     "stroke-width": 2,
     "stroke-opacity": 1,
+    geometry: {
+      type: "MultiLineString",
+      coordinates: [],
+    },
   };
-  coordinates = [];
 }
+
 var day_zero_line = new RouteLine("day_zero_line");
 day_zero_line.coordinates = dayzero.features[0].geometry.coordinates[0];
 
-// console.log(dayzero.features[0].geometry.coordinates[0]);
+console.log(day_zero_line.coordinates);
 
 let map = makemap();
 map.on("load", () => {});
 
 map.on("style.load", () => {
-  const day_zero_line = {
-    type: "Feature",
-    properties: {
-      stroke: "#555555",
-      "stroke-width": 2,
-      "stroke-opacity": 1,
-    },
-    geometry: {
-      type: "LineString",
-      coordinates: [],
-    },
-  };
   map.addSource("day-zero", {
     type: "geojson",
     data: day_zero_line,
