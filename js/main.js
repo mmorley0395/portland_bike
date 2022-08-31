@@ -1,23 +1,24 @@
 import { makemap } from "./map.js";
 import { dayzero } from "../routes/dayzero.js";
 
-class RouteLine {
-  type = "Feature";
-  properties = {
+var day_zero_line = {
+  type: "Feature",
+  properties: {
     stroke: "#555555",
     "stroke-width": 2,
     "stroke-opacity": 1,
-    geometry: {
-      type: "MultiLineString",
-      coordinates: [],
-    },
-  };
-}
+  },
+  geometry: {
+    type: "LineString",
+    coordinates: [],
+  },
+};
 
-var day_zero_line = new RouteLine("day_zero_line");
-day_zero_line.coordinates = dayzero.features[0].geometry.coordinates[0];
+// var day_zero_line = new RouteLine("day_zero_line");
+day_zero_line.geometry.coordinates =
+  dayzero.features[0].geometry.coordinates[0];
 
-console.log(day_zero_line.coordinates);
+console.log(day_zero_line);
 
 let map = makemap();
 map.on("load", () => {});
