@@ -1,0 +1,3 @@
+pull out animation in to separate js file
+add other layer geojsons 
+store json directly as json in routes.. 
