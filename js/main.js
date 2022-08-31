@@ -1,41 +1,35 @@
 import { makemap } from "./map.js";
-import { route_jsons } from "./coordinates.js";
+import { dayzero } from "../routes/dayzero.js";
 
-class RouteLine {
-  type = "Feature";
-  properties = {
+var day_zero_line = {
+  type: "Feature",
+  properties: {
     stroke: "#555555",
     "stroke-width": 2,
     "stroke-opacity": 1,
-  };
-  coordinates = [];
-}
+  },
+  geometry: {
+    type: "LineString",
+    coordinates: [],
+  },
+};
+
+// var day_zero_line = new RouteLine("day_zero_line");
+day_zero_line.geometry.coordinates =
+  dayzero.features[0].geometry.coordinates[0];
+
+console.log(day_zero_line);
 
 let map = makemap();
-map.on("load", () => {
-  // LOAD DATA: add vector tileset from DVRPC's server
-});
-map.on("style.load", () => {
-  const day_zero_line = {
-    type: "Feature",
-    properties: {
-      stroke: "#555555",
-      "stroke-width": 2,
-      "stroke-opacity": 1,
-    },
-    geometry: {
-      type: "LineString",
-      coordinates: [],
-    },
-  };
+map.on("load", () => {});
 
+map.on("style.load", () => {
   map.addSource("day-zero", {
     type: "geojson",
     data: day_zero_line,
     // Line metrics is required to use the 'line-progress' property
     lineMetrics: true,
   });
-
   map.addLayer({
     id: "day-zero-line",
     type: "line",
