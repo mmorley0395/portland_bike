@@ -1,5 +1,4 @@
 import { makemap } from "./map.js";
-import { dayzero } from "../routes/dayzero.js";
 
 var day_zero_line = {
   type: "Feature",
@@ -24,16 +23,16 @@ let map = makemap();
 map.on("load", () => {});
 
 map.on("style.load", () => {
-  map.addSource("day-zero", {
+  map.addSource("route", {
     type: "geojson",
-    data: day_zero_line,
+    data: "https://github.com/mmorley0395/portland_bike/blob/main/routes/dayzero.json",
     // Line metrics is required to use the 'line-progress' property
     lineMetrics: true,
   });
   map.addLayer({
-    id: "day-zero-line",
+    id: "route-line",
     type: "line",
-    source: "day-zero",
+    source: "route",
     paint: {
       "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
@@ -50,7 +49,7 @@ map.on("style.load", () => {
 
     // Reduce the visible length of the line by using a line-gradient to cutoff the line
     // animationPhase is a value between 0 and 1 that reprents the progress of the animation
-    map.setPaintProperty("day-zero-line", "line-gradient", [
+    map.setPaintProperty("route-line", "line-gradient", [
       "step",
       ["line-progress"],
       "#77dcb7",
