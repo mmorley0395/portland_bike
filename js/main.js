@@ -1,31 +1,12 @@
 import { makemap } from "./map.js";
 
-var day_zero_line = {
-  type: "Feature",
-  properties: {
-    stroke: "#555555",
-    "stroke-width": 2,
-    "stroke-opacity": 1,
-  },
-  geometry: {
-    type: "LineString",
-    coordinates: [],
-  },
-};
-
-// var day_zero_line = new RouteLine("day_zero_line");
-day_zero_line.geometry.coordinates =
-  dayzero.features[0].geometry.coordinates[0];
-
-console.log(day_zero_line);
-
 let map = makemap();
 map.on("load", () => {});
 
 map.on("style.load", () => {
   map.addSource("route", {
     type: "geojson",
-    data: "https://github.com/mmorley0395/portland_bike/blob/main/routes/dayzero.json",
+    data: "https://mmorley0395.github.io/portland_bike/routes/dayzero.json",
     // Line metrics is required to use the 'line-progress' property
     lineMetrics: true,
   });
