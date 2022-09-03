@@ -112,7 +112,7 @@ map.on("idle", () => {
       } else {
         this.className = "active";
         map.setLayoutProperty(clickedLayer, "visibility", "visible");
-        makeAnimation();
+        makeAnimation(clickedLayer);
       }
     };
 
