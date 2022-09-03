@@ -14,7 +14,7 @@ map.on("load", () => {
     type: "line",
     source: "day1",
     paint: {
-      "line-color": "rgba(101,101,101,101)",
+      "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
       "line-opacity": 0.7,
     },
@@ -30,7 +30,7 @@ map.on("load", () => {
     type: "line",
     source: "day2",
     paint: {
-      "line-color": "rgba(101,101,101,101)",
+      "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
       "line-opacity": 0.7,
     },
@@ -46,7 +46,7 @@ map.on("load", () => {
     type: "line",
     source: "day3",
     paint: {
-      "line-color": "rgba(101,101,101,101)",
+      "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
       "line-opacity": 0.7,
     },
@@ -62,7 +62,7 @@ map.on("load", () => {
     type: "line",
     source: "day4",
     paint: {
-      "line-color": "rgba(101,101,101,101)",
+      "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
       "line-opacity": 0.7,
     },
