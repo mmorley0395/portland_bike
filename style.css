@@ -39,3 +39,34 @@ body {
   width: 25%;
   height: 100%;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.button {
+  background-color: #77dcb7; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 20px;
+  cursor: pointer;
+  border-radius: 10%;
+}
+
+.Button {
+  color: rgb(255, 255, 255);
+  background-color: #77dcb7; /* Green */
+  padding: 8px;
+  border-radius: 4px;
+  margin: 8px;
+}
