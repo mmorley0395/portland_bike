@@ -7,7 +7,28 @@ export const frame = (time) => {
   const animationPhaseDisplay = animationPhase.toFixed(2);
   // Reduce the visible length of the line by using a line-gradient to cutoff the line
   // animationPhase is a value between 0 and 1 that reprents the progress of the animation
-  map.setPaintProperty("route-line", "line-gradient", [
+  map.setPaintProperty("day1", "line-gradient", [
+    "step",
+    ["line-progress"],
+    "#77dcb7",
+    animationPhase,
+    "rgba(0, 0, 0, 0)",
+  ]);
+  map.setPaintProperty("day2", "line-gradient", [
+    "step",
+    ["line-progress"],
+    "#77dcb7",
+    animationPhase,
+    "rgba(0, 0, 0, 0)",
+  ]);
+  map.setPaintProperty("day3", "line-gradient", [
+    "step",
+    ["line-progress"],
+    "#77dcb7",
+    animationPhase,
+    "rgba(0, 0, 0, 0)",
+  ]);
+  map.setPaintProperty("day4", "line-gradient", [
     "step",
     ["line-progress"],
     "#77dcb7",
