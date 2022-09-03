@@ -13,12 +13,14 @@ map.on("load", () => {
     id: "day1",
     type: "line",
     source: "day1",
+    visibility: "none",
     paint: {
       "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
       "line-opacity": 0.7,
     },
   });
+  map.setLayoutProperty("day1", "visibility");
 
   map.addSource("day2", {
     type: "geojson",
@@ -29,6 +31,7 @@ map.on("load", () => {
     id: "day2",
     type: "line",
     source: "day2",
+    visibility: "none",
     paint: {
       "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
@@ -45,6 +48,7 @@ map.on("load", () => {
     id: "day3",
     type: "line",
     source: "day3",
+    visibility: "none",
     paint: {
       "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
@@ -61,6 +65,7 @@ map.on("load", () => {
     id: "day4",
     type: "line",
     source: "day4",
+    visibility: "none",
     paint: {
       "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
@@ -91,7 +96,7 @@ map.on("idle", () => {
     link.id = id;
     link.href = "#";
     link.textContent = id;
-    link.className = "active";
+    link.className = "inactive";
     // Show or hide layer when the toggle is clicked.
     link.onclick = function (e) {
       const clickedLayer = this.textContent;
