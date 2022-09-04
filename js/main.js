@@ -1,5 +1,5 @@
 import { makemap } from "./map.js";
-import { makeAnimation } from "./animate.js";
+import { makeAnimation, resetStarttime } from "./animate.js";
 
 export let map = makemap();
 
@@ -110,6 +110,7 @@ map.on("idle", () => {
       ];
 
       var nonclicked = days.filter((day) => day != clickedLayer);
+      console.log(nonclicked);
 
       e.preventDefault();
       e.stopPropagation();
@@ -125,8 +126,9 @@ map.on("idle", () => {
         map.setLayoutProperty(clickedLayer, "visibility", "visible");
         var d, nonclicked;
         for (d of nonclicked) {
-          map.setLayoutProperty(d, "visibility", "visible");
+          map.setLayoutProperty(d, "visibility", "none");
         }
+        resetStarttime;
         makeAnimation(clickedLayer);
       }
     };
