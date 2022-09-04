@@ -1,5 +1,5 @@
 import { makemap } from "./map.js";
-import { frame, makeAnimation, startTime, duration } from "./animate.js";
+import { makeAnimation } from "./animate.js";
 
 export let map = makemap();
 
@@ -100,6 +100,17 @@ map.on("idle", () => {
     // Show or hide layer when the toggle is clicked.
     link.onclick = function (e) {
       const clickedLayer = this.textContent;
+      const maplayers = map.getStyle().layers;
+
+      var days = [
+        maplayers[80]["id"],
+        maplayers[81]["id"],
+        maplayers[82]["id"],
+        maplayers[83]["id"],
+      ];
+
+      var nonclicked = days.filter((day) => day != clickedLayer);
+
       e.preventDefault();
       e.stopPropagation();
 
@@ -112,6 +123,10 @@ map.on("idle", () => {
       } else {
         this.className = "active";
         map.setLayoutProperty(clickedLayer, "visibility", "visible");
+        var d, nonclicked;
+        for (d of nonclicked) {
+          map.setLayoutProperty(d, "visibility", "visible");
+        }
         makeAnimation(clickedLayer);
       }
     };
