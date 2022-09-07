@@ -1,5 +1,5 @@
 import { makemap } from "./map.js";
-import { frame, makeAnimation, startTime, duration } from "./animate.js";
+import { makeAnimation, resetStarttime } from "./animate.js";
 
 export let map = makemap();
 
@@ -13,12 +13,14 @@ map.on("load", () => {
     id: "day1",
     type: "line",
     source: "day1",
+    visibility: "none",
     paint: {
-      "line-color": "rgba(101,101,101,101)",
+      "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
       "line-opacity": 0.7,
     },
   });
+  map.setLayoutProperty("day1", "visibility");
 
   map.addSource("day2", {
     type: "geojson",
@@ -29,8 +31,9 @@ map.on("load", () => {
     id: "day2",
     type: "line",
     source: "day2",
+    visibility: "none",
     paint: {
-      "line-color": "rgba(101,101,101,101)",
+      "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
       "line-opacity": 0.7,
     },
@@ -45,36 +48,43 @@ map.on("load", () => {
     id: "day3",
     type: "line",
     source: "day3",
+    visibility: "none",
     paint: {
-      "line-color": "rgba(101,101,101,101)",
+      "line-color": "rgba(0,0,0,0)",
       "line-width": 8,
       "line-opacity": 0.7,
     },
   });
 
-  // map.addSource("day4", {
-  //   type: "geojson",
-  //   data: "https://mmorley0395.github.io/portland_bike/routes/dayfour.json",
-  //   lineMetrics: true,
-  // });
-  // map.addLayer({
-  //   id: "day4",
-  //   type: "line",
-  //   source: "day4",
-  //   paint: {
-  //     "line-color": "rgba(101,101,101,101)",
-  //     "line-width": 8,
-  //     "line-opacity": 0.7,
-  //   },
-  // });
+  map.addSource("day4", {
+    type: "geojson",
+    data: "https://mmorley0395.github.io/portland_bike/routes/dayfour.json",
+    lineMetrics: true,
+  });
+  map.addLayer({
+    id: "day4",
+    type: "line",
+    source: "day4",
+    visibility: "none",
+    paint: {
+      "line-color": "rgba(0,0,0,0)",
+      "line-width": 8,
+      "line-opacity": 0.7,
+    },
+  });
 });
 map.on("idle", () => {
   // If these two layers were not added to the map, abort
-  if (!map.getLayer("day1") || !map.getLayer("day2") || !map.getLayer("day3")) {
+  if (
+    !map.getLayer("day1") ||
+    !map.getLayer("day2") ||
+    !map.getLayer("day3") ||
+    !map.getLayer("day4")
+  ) {
     return;
   }
   // Enumerate ids of the layers.
-  const toggleableLayerIds = ["day1", "day2", "day3"];
+  const toggleableLayerIds = ["day1", "day2", "day3", "day4"];
   // Set up the corresponding toggle button for each layer.
   for (const id of toggleableLayerIds) {
     // Skip layers that already have a button set up.
@@ -86,10 +96,21 @@ map.on("idle", () => {
     link.id = id;
     link.href = "#";
     link.textContent = id;
-    link.className = "active";
+    link.className = "inactive";
     // Show or hide layer when the toggle is clicked.
     link.onclick = function (e) {
       const clickedLayer = this.textContent;
+      const maplayers = map.getStyle().layers;
+
+      var days = [
+        maplayers[80]["id"],
+        maplayers[81]["id"],
+        maplayers[82]["id"],
+        maplayers[83]["id"],
+      ];
+
+      var nonclicked = days.filter((day) => day != clickedLayer);
+
       e.preventDefault();
       e.stopPropagation();
 
@@ -102,6 +123,22 @@ map.on("idle", () => {
       } else {
         this.className = "active";
         map.setLayoutProperty(clickedLayer, "visibility", "visible");
+
+        var b, nonclicked;
+        for (b of nonclicked) {
+          var element = document.querySelector(`a[id=${b}]`);
+          element.toggleAttribute("class");
+        }
+
+        // console.log(nonclicked);
+        // console.log(document.querySelector("a[id=day2]"));
+
+        var d, nonclicked;
+        for (d of nonclicked) {
+          map.setLayoutProperty(d, "visibility", "none");
+        }
+        resetStarttime();
+        makeAnimation(clickedLayer);
       }
     };
 
@@ -109,85 +146,3 @@ map.on("idle", () => {
     layers.appendChild(link);
   }
 });
-// class ControlButton {
-//   onAdd(map) {
-//     this.map = map;
-//     this.container = document.createElement("div");
-//     this.container.className = "Button";
-//     this.container.textContent = "Day X";
-//     return this.container;
-//   }
-//   onRemove() {
-//     this.container.parentNode.removeChild(this.container);
-//     this.map = undefined;
-//   }
-// }
-
-// function add_day_one() {
-//   console.log("testing if this block runs");
-//   map.addLayer({
-//     id: "route-line",
-//     type: "line",
-//     source: "day1",
-//     paint: {
-//       "line-color": "rgba(0,0,0,0)",
-//       "line-width": 8,
-//       "line-opacity": 0.7,
-//     },
-//   });
-//   console.log("layer added successfully");
-//   makeAnimation();
-// }
-
-console.log("layer added successfully");
-// makeAnimation();
-
-// const dayOne = new ControlButton();
-// console.log(dayOne);
-// map.addControl(dayOne);
-// dayOne.container.textContent = "Day 1";
-// // dayOne.container.addEventListener("click", removeAll());
-// dayOne.container.addEventListener("click", add_day_one());
-
-// function removeAll() {
-//   if (map.getLayer("route-line")) map.removeLayer("route-line");
-// }
-
-// Control implemented as ES6 class
-
-// map.addLayer({
-//   id: "route-line",
-//   type: "line",
-//   source: "route",
-//   paint: {
-//     "line-color": "rgba(0,0,0,0)",
-//     "line-width": 8,
-//     "line-opacity": 0.7,
-//   },
-// });
-
-// const dayTwo = new ControlButton();
-// map.addControl(dayTwo);
-// dayTwo.container.textContent = "Day 2";
-// dayTwo.container.addEventListener(
-//   "click",
-//   map.addLayer({
-//     id: "route-line",
-//     type: "line",
-//     source: "day2",
-//     paint: {
-//       "line-color": "rgba(0,0,0,0)",
-//       "line-width": 8,
-//       "line-opacity": 0.7,
-//     },
-//   })
-//   // makeAnimation()
-// );
-
-// const dayThree = new ControlButton();
-// map.addControl(dayThree);
-// dayThree.container.textContent = "Day 3";
-
-// const dayFour = new ControlButton();
-// map.addControl(dayFour);
-// dayFour.container.textContent = "Day 4";

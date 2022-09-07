@@ -96,15 +96,15 @@ body {
 }
 
 #menu a:hover {
-  background-color: #f8f8f8;
+  background-color: #77dcb7;
   color: #404040;
 }
 
 #menu a.active {
-  background-color: #3887be;
-  color: #ffffff;
+  background-color: #77dcb7;
+  color: #514d4d;
 }
 
 #menu a.active:hover {
-  background: #3074a4;
+  background: #77dcb7;
 }
