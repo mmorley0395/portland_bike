@@ -7,6 +7,7 @@ function day1frame(time) {
   const day1animationPhase = (time - startTime) / duration;
   // Reduce the visible length of the line by using a line-gradient to cutoff the line
   // animationPhase is a value between 0 and 1 that reprents the progress of the animation
+  console.log(day1animationPhase);
   map.setPaintProperty("day1", "line-gradient", [
     "step",
     ["line-progress"],
@@ -79,6 +80,7 @@ function day4frame(time) {
 
 function makeAnimation(clickedLayer) {
   const duration = 40000;
+  startTime = 0;
   console.log(clickedLayer);
   if (clickedLayer == "day1") {
     window.requestAnimationFrame(day1frame);
@@ -90,18 +92,18 @@ function makeAnimation(clickedLayer) {
     window.requestAnimationFrame(day4frame);
   }
   // repeat;
-  setInterval(() => {
-    startTime = undefined;
-    if (clickedLayer == "day1") {
-      window.requestAnimationFrame(day1frame);
-    } else if (clickedLayer == "day2") {
-      window.requestAnimationFrame(day2frame);
-    } else if (clickedLayer == "day3") {
-      window.requestAnimationFrame(day3frame);
-    } else if (clickedLayer == "day4") {
-      window.requestAnimationFrame(day4frame);
-    }
-  }, duration + 1500);
+  // setInterval(() => {
+  //   startTime = 0;
+  //   if (clickedLayer == "day1") {
+  //     window.requestAnimationFrame(day1frame);
+  //   } else if (clickedLayer == "day2") {
+  //     window.requestAnimationFrame(day2frame);
+  //   } else if (clickedLayer == "day3") {
+  //     window.requestAnimationFrame(day3frame);
+  //   } else if (clickedLayer == "day4") {
+  //     window.requestAnimationFrame(day4frame);
+  //   }
+  // }, duration + 1500);
 }
 
 function resetStarttime() {
