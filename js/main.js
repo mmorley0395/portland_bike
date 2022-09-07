@@ -110,7 +110,6 @@ map.on("idle", () => {
       ];
 
       var nonclicked = days.filter((day) => day != clickedLayer);
-      console.log(nonclicked);
 
       e.preventDefault();
       e.stopPropagation();
@@ -124,11 +123,21 @@ map.on("idle", () => {
       } else {
         this.className = "active";
         map.setLayoutProperty(clickedLayer, "visibility", "visible");
+
+        var b, nonclicked;
+        for (b of nonclicked) {
+          var element = document.querySelector(`a[id=${b}]`);
+          element.toggleAttribute("class");
+        }
+
+        // console.log(nonclicked);
+        // console.log(document.querySelector("a[id=day2]"));
+
         var d, nonclicked;
         for (d of nonclicked) {
           map.setLayoutProperty(d, "visibility", "none");
         }
-        resetStarttime;
+        resetStarttime();
         makeAnimation(clickedLayer);
       }
     };
